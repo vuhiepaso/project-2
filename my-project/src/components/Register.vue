@@ -14,6 +14,7 @@
           type="tel"
           placeholder="Phone"
           :prefix-icon="Iphone"
+          @input="errPhone = ''"
         />
         <p class="text-red-500 text-sm">{{ errPhone }}</p>
 
@@ -24,20 +25,26 @@
           placeholder="Password"
           show-password
           :prefix-icon="Key"
+          @input="errPass = ''"
         />
         <p class="text-red-500 text-sm">{{ errPass }}</p>
 
         <p class="text-zinc-100 mt-3">Verify password</p>
         <el-input
-          v-model="inputPass"
+          v-model="verifyInputPass"
           type="password"
           placeholder="Verify password"
           show-password
           :prefix-icon="Key"
+          @input="errPass = ''"
         />
+
         <p class="text-red-500 text-sm">{{ errPass }}</p>
         <div class="flex justify-center">
-          <el-button type="warning" class="mt-4 w-full max-w-xs"
+          <el-button
+            type="warning"
+            class="mt-4 w-full max-w-xs"
+            @click="onRegister(input, inputPass, verifyInputPass)"
             >Register</el-button
           >
         </div>
@@ -55,6 +62,7 @@
 </template>
 <script  setup>
 import { Iphone, Key } from "@element-plus/icons-vue";
+import validateRegister from "../components/validate/validateRegister";
 </script>
 <script >
 export default {
@@ -62,9 +70,26 @@ export default {
     return {
       input: "",
       inputPass: "",
-      errPhone: "err",
-      errPass: "err",
+      verifyInputPass: "",
+
+      errPhone: "",
+      errPass: "",
     };
+  },
+  methods: {
+    onRegister(phone, password, verifyInputPass) {
+      const { errors, isValid } = this.validateRegister({
+        phone,
+        password,
+        verifyInputPass,
+      });
+      if (isValid) {
+        alert(isValid);
+      } else {
+        this.errPhone = errors.phone;
+        this.errPass = errors.password;
+      }
+    },
   },
 };
 </script>
