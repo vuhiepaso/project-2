@@ -7,9 +7,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^0.2.7",
     "@oruga-ui/oruga-next": "^0.5.3",
+    "axios": "^0.26.0",
     "element-plus": "^2.0.1",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-i18n": "^9.1.9"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
