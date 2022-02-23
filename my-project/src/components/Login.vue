@@ -14,6 +14,7 @@
           type="tel"
           placeholder="Phone"
           :prefix-icon="Iphone"
+          @input="errPhone = ''"
         />
         <p class="text-red-500 text-sm">{{ errPhone }}</p>
 
@@ -24,11 +25,15 @@
           placeholder="Password"
           show-password
           :prefix-icon="Key"
+          @input="errPass = ''"
         />
         <p class="text-red-500 text-sm">{{ errPass }}</p>
 
         <div class="flex justify-center">
-          <el-button type="warning" class="mt-4 w-full max-w-xs"
+          <el-button
+            type="warning"
+            class="mt-4 w-full max-w-xs"
+            @click="onLogin(input, inputPass)"
             >Login</el-button
           >
         </div>
@@ -49,6 +54,7 @@
 
 <script  setup>
 import { Iphone, Key } from "@element-plus/icons-vue";
+import validateLogin from "../components/validate/validateLogin";
 </script>
 <script >
 export default {
@@ -56,9 +62,21 @@ export default {
     return {
       input: "",
       inputPass: "",
-      errPhone: "err",
-      errPass: "err",
+
+      errPhone: "",
+      errPass: "",
     };
+  },
+  methods: {
+    onLogin(phone, password) {
+      const { errors, isValid } = this.validateLogin({ phone, password });
+      if (isValid) {
+        alert(isValid);
+      } else {
+        this.errPhone = errors.phone;
+        this.errPass = errors.password;
+      }
+    },
   },
 };
 </script>
