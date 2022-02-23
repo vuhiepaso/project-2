@@ -9,7 +9,10 @@
         </template>
         <CalendarHair />
       </el-tab-pane>
-      <el-tab-pane label="Service">Service</el-tab-pane>
+
+      <el-tab-pane label="Service">
+        <Service />
+      </el-tab-pane>
       <el-tab-pane label="Role">Role</el-tab-pane>
       <el-tab-pane label="Task">Task</el-tab-pane>
     </el-tabs>
@@ -19,6 +22,7 @@
 <script  setup>
 import { Calendar } from "@element-plus/icons-vue";
 import CalendarHair from "./CalendarHair.vue";
+import Service from "./Service.vue";
 </script>
 <style>
 .demo-tabs > .el-tabs__content {
